@@ -4,7 +4,7 @@ public class Usuario {
 
 	private int id;
 	private String nome;
-	
+
 	public Usuario(String nome) {
 		this(0, nome);
 	}
@@ -21,7 +21,5 @@ public class Usuario {
 	public String getNome() {
 		return nome;
 	}
-	
-	
-	
+
 }

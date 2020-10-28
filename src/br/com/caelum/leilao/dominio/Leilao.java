@@ -8,14 +8,34 @@ public class Leilao {
 
 	private String descricao;
 	private List<Lance> lances;
-	
+
 	public Leilao(String descricao) {
 		this.descricao = descricao;
 		this.lances = new ArrayList<Lance>();
 	}
-	
+
 	public void propoe(Lance lance) {
-		lances.add(lance);
+		if (lances.isEmpty() || podeDarLance(lance.getUsuario())) {
+			lances.add(lance);
+		}
+	}
+
+	private boolean podeDarLance(Usuario usuario) {
+		return !ultimoLanceDados().getUsuario().equals(usuario) && qtdDeLancesDo(usuario) < 5;
+	}
+
+	private int qtdDeLancesDo(Usuario usuario) {
+		int total = 0;
+		for (Lance l : lances) {
+			if (l.getUsuario().equals(usuario)) {
+				total++;
+			}
+		}
+		return total;
+	}
+
+	private Lance ultimoLanceDados() {
+		return lances.get(lances.size() - 1);
 	}
 
 	public String getDescricao() {
@@ -26,6 +46,4 @@ public class Leilao {
 		return Collections.unmodifiableList(lances);
 	}
 
-	
-	
 }
