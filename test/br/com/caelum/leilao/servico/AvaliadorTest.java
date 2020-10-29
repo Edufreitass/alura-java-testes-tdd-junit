@@ -69,8 +69,7 @@ public class AvaliadorTest {
 		leiloeiro.avalia(leilao);
 
 		// parte 3: validacao
-		assertEquals(1000.0, leiloeiro.getMaiorLance(), 0.00001);
-		assertEquals(1000.0, leiloeiro.getMenorLance(), 0.00001);
+		assertThat(leiloeiro.getMenorLance(), equalTo(leiloeiro.getMaiorLance()));
 	}
 
 	@Test

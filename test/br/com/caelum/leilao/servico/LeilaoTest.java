@@ -1,6 +1,8 @@
 package br.com.caelum.leilao.servico;
 
 import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.Test;
 
@@ -18,11 +20,12 @@ public class LeilaoTest {
 		assertEquals(0, leilao.getLances().size());
 
 		// acao
-		leilao.propoe(new Lance(new Usuario("Steve Jobs"), 2000));
+		Lance lance = new Lance(new Usuario("Steve Jobs"), 2000);
+        leilao.propoe(lance);
 
 		// validacao
-		assertEquals(1, leilao.getLances().size());
-		assertEquals(2000.0, leilao.getLances().get(0).getValor(), 0.00001);
+        assertThat(leilao.getLances().size(), equalTo(1));
+        assertThat(leilao, LeilaoMatcher.temUmLance(lance));
 	}
 
 	@Test
